@@ -1,0 +1,66 @@
+import { useContext } from "react";
+import AuthContext from "../lib/AuthContext";
+
+const RoleDashboard = () => {
+  const { user } = useContext(AuthContext);
+
+  return (
+    <div className="p-6">
+      <h1 className="text-2xl font-bold text-gray-900">Welcome, {user?.name || user?.email}</h1>
+      <p className="text-1xl font-bold text-gray-900">Role: {user?.role}</p>
+
+      <section className="mt-6">
+        {user?.role === "Super Admin" && (
+          <div>
+            <h2 className="text-2xl font-bold text-gray-900">Super Admin Overview:</h2>
+            <ul className="text-1xl font text-gray-900">
+              <li>Manage users and system settings</li>
+              <li>View full analytics</li>
+              <li>Seed or create super admin accounts</li>
+            </ul>
+          </div>
+        )}
+
+        {user?.role === "Administrator" && (
+          <div>
+            <h2 className="text-2xl font-bold text-gray-900">Administrator Overview</h2>
+            <ul className="text-1xl font text-gray-900">
+              <li>Manage drivers, units, and schedules</li>
+              <li>Approve remittances</li>
+            </ul>
+          </div>
+        )}
+
+        {user?.role === "Cashier" && (
+          <div>
+            <h2 className="text-2xl font-bold text-gray-900">Cashier Dashboard</h2>
+            <p className="mt-2">Quick access to remittances and fuel transactions.</p>
+          </div>
+        )}
+
+        {user?.role === "Fuel Pump Attendant" && (
+          <div>
+            <h2 className="text-2xl font-bold text-gray-900">Pump Attendant Panel</h2>
+            <p className="mt-2">View assigned schedules and fuel operations.</p>
+          </div>
+        )}
+
+        {user?.role === "Operational Manager" && (
+          <div>
+            <h2 className="text-2xl font-bold text-gray-900">Operational Manager View</h2>
+            <p className="mt-2">High level operational analytics and scheduling controls.</p>
+          </div>
+        )}
+
+        {user?.role === "Mechanic" && (
+          <div>
+            <h2 className="text-2xl font-bold text-gray-900">Mechanic Panel</h2>
+            <p className="mt-2">View maintenance jobs and repair histories.</p>
+          </div>
+        )}
+      </section>
+    </div>
+  );
+};
+
+export default RoleDashboard;
